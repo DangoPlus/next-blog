@@ -1,5 +1,5 @@
-import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 // Function to salt and hash a password
 async function saltAndHashPassword(plainTextPassword: string) {
   const saltRounds = 12;
@@ -8,7 +8,7 @@ async function saltAndHashPassword(plainTextPassword: string) {
 }
 async function verifyPassword(
   plaintextPassword: string,
-  hashedPassword: string
+  hashedPassword: string,
 ) {
   return await bcrypt.compare(plaintextPassword, hashedPassword);
 }
@@ -29,13 +29,11 @@ async function getUserFromDb(email: string) {
       },
     });
     if (!user) {
-      console.error("No user found with that email.");
-      return null;
+      throw new Error("No user found with that email.");
     }
     return user;
   } catch (error) {
-    console.error("Error retrieving user from database:", error);
-    return null;
+    throw new Error("Error retrieving user from database:" + error);
   }
 }
-export { saltAndHashPassword, verifyPassword, getUserFromDb };
+export { getUserFromDb, saltAndHashPassword, verifyPassword };

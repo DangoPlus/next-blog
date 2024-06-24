@@ -1,13 +1,11 @@
-'use client'
- 
-import { useRouter } from 'next/navigation'
+"use client";
 import { Button } from "@chakra-ui/react";
+import { signOut } from "next-auth/react";
 export default function SignOut() {
-    const router = useRouter()
   return (
     <Button
-      onClick={ () => {
-        router.push('/admin/signout')
+      onClick={() => {
+        signOut();
       }}
     >
       Sign Out

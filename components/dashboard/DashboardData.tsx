@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import { Link } from "@chakra-ui/next-js";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function DashboardData() {
   const [data, setData] = useState({});
@@ -13,7 +13,7 @@ function DashboardData() {
       }
       const data = await response.json();
       setData(data);
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("Error fetching data:", error);
       setData({ error: error.message });
     }

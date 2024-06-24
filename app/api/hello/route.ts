@@ -3,7 +3,7 @@ import { getCurrentTimeAndRandomHash } from "@/utils/timehash";
 export async function GET(request: Request) {
   const data = {
     message: "Hello, Next.js!",
-    timehas: getCurrentTimeAndRandomHash(),
+    timehash: getCurrentTimeAndRandomHash(),
   };
 
   return new Response(JSON.stringify(data), {

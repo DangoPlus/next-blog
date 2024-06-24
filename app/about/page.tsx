@@ -1,6 +1,5 @@
-'use client'
+"use client";
 import { Link } from "@chakra-ui/next-js";
-import styles from "./page.module.css";
 
 export default function About() {
   return (

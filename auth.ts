@@ -1,3 +1,4 @@
+import { signInSchema } from "@/lib/zod";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 // Your own logic for dealing with plaintext password strings; be careful!
@@ -14,21 +15,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         let user = null;
-        if (!credentials.password) {
-          throw new Error("Password is required.");
-        }
-        // logic to salt and hash password
-        console.log(credentials)
+
+        const { email, password } = await signInSchema.parseAsync(credentials);
+
         // logic to verify if user exists
-        user = await getUserFromDb(
-          credentials.email as string
-        );
+        user = await getUserFromDb(email);
         if (!user) {
           // No user found, so this is their first attempt to login
           // meaning this is also the place you could do registration
           throw new Error("User not found.");
         }
-        const isPasswordValid = await verifyPassword(credentials.password as string, user.password);
+        const isPasswordValid = await verifyPassword(password, user.password);
         if (!isPasswordValid) {
           throw new Error("Password is incorrect.");
         }
