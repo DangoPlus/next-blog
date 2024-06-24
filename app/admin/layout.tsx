@@ -1,3 +1,4 @@
+import SideMenu from "@/components/dashboard/SideMenu";
 import styles from "./layout.module.scss";
 export default function RootLayout({
   children,
@@ -7,6 +8,7 @@ export default function RootLayout({
   return (
     <div className={styles.wrapper}>
       <h1>this is admin layout</h1>
+      <SideMenu />
       {children}
     </div>
   );
